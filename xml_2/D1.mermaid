@@ -8,10 +8,10 @@ flowchart TD
     Father{father} ---|child| Person
     Father{father} -->|father| Person
 
-    Son{son} ---|parent| Person
+    Son{son} ---|parent <=2| Person
     Son{son} ---|son| Person
 
-    Daughter{daughter} ---|parent| Person
+    Daughter{daughter} ---|parent <= 2| Person
     Daughter{daughter} ---|daughter| Person
 
     Sister{sister} ---|sibling| Person

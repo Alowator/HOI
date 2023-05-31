@@ -1,0 +1,52 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+  <display-name>Flight Booking API</display-name>
+
+  <servlet>
+    <servlet-name>Cities</servlet-name>
+    <servlet-class>alowator.servlet.CitiesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Airports</servlet-name>
+    <servlet-class>alowator.servlet.AirportsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Flights</servlet-name>
+    <servlet-class>alowator.servlet.FlightsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Routes</servlet-name>
+    <servlet-class>alowator.servlet.RoutesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Bookings</servlet-name>
+    <servlet-class>alowator.servlet.BookingsServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Cities</servlet-name>
+    <url-pattern>/cities</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Airports</servlet-name>
+    <url-pattern>/airports</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Flights</servlet-name>
+    <url-pattern>/inbound-schedule</url-pattern>
+    <url-pattern>/outbound-schedule</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Routes</servlet-name>
+    <url-pattern>/routes</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Bookings</servlet-name>
+    <url-pattern>/booking</url-pattern>
+    <url-pattern>/check-in</url-pattern>
+  </servlet-mapping>
+</web-app>

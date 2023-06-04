@@ -17,15 +17,15 @@
                     (Thread/sleep duration))),
           eat (fn [i left_fork right_fork duration]
                   (dosync
-                    (swap! transaction_restarts add)
+                    (swap! transaction_restarts inc)
                     (println "Philosopher " i " begin eat")
-                    (alter left_fork add)
+                    (alter left_fork inc)
                     (println "Philosopher " i " take left fork")
-                    (alter right_fork add)
+                    (alter right_fork inc)
                     (println "Philosopher " i " take right fork")
                     (Thread/sleep duration)
                     (println "Philosopher " i " finish eat")
-                    (swap! transaction_restarts add)))]
+                    (swap! transaction_restarts dec)))]
       (new Thread (fn []
                     (doseq [_ (range dining_number)]
                       (do

@@ -1,16 +1,19 @@
-package alowator.servlet;
+package alowator.api.servlet;
 
 import alowator.storage.Storage;
-import alowator.storage.entity.Flight;
 import alowator.storage.entity.Route;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public final class RoutesServlet extends RestServlet {
+import static alowator.api.Common.sendJsonError;
+import static alowator.api.Common.sendJsonResponse;
+
+public final class RoutesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -18,15 +21,7 @@ public final class RoutesServlet extends RestServlet {
         String destination = request.getParameter("destination");
         String departureDate = request.getParameter("departureDate");
         String bookingClass = request.getParameter("bookingClass");
-        String maxConnections = request.getParameter("maxConnections");
-
-        if (source == null || destination == null || departureDate == null || bookingClass == null) {
-            sendJsonError(response, HttpServletResponse.SC_BAD_REQUEST, "Args code must be set");
-            return;
-        }
-        if (maxConnections == null) {
-            maxConnections = String.valueOf(Integer.MAX_VALUE);
-        }
+        String maxConnections = (String) request.getAttribute("maxConnections");
 
         List<Route> routes;
         try {

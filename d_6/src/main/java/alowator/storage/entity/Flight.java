@@ -19,12 +19,4 @@ public class Flight {
         this.origin = origin;
         this.destination = destination;
     }
-
-    public Flight(String flightNo, Set<Integer> daysOfWeek, String time, String origin, String destination) {
-        this.flightNo = flightNo;
-        this.daysOfWeek = daysOfWeek;
-        this.time = time;
-        this.origin = origin;
-        this.destination = destination;
-    }
 }

@@ -8,24 +8,37 @@
 
   <servlet>
     <servlet-name>Cities</servlet-name>
-    <servlet-class>alowator.servlet.CitiesServlet</servlet-class>
+    <servlet-class>alowator.api.servlet.CitiesServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Airports</servlet-name>
-    <servlet-class>alowator.servlet.AirportsServlet</servlet-class>
+    <servlet-class>alowator.api.servlet.AirportsServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Flights</servlet-name>
-    <servlet-class>alowator.servlet.FlightsServlet</servlet-class>
+    <servlet-class>alowator.api.servlet.FlightsServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Routes</servlet-name>
-    <servlet-class>alowator.servlet.RoutesServlet</servlet-class>
+    <servlet-class>alowator.api.servlet.RoutesServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Bookings</servlet-name>
-    <servlet-class>alowator.servlet.BookingsServlet</servlet-class>
+    <servlet-class>alowator.api.servlet.BookingsServlet</servlet-class>
   </servlet>
+
+  <filter>
+    <filter-name>RestFilter</filter-name>
+    <filter-class>alowator.api.filter.RestFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>FlightsQueryFilter</filter-name>
+    <filter-class>alowator.api.filter.FlightsQueryFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>RoutesQueryFilter</filter-name>
+    <filter-class>alowator.api.filter.RoutesQueryFilter</filter-class>
+  </filter>
 
   <servlet-mapping>
     <servlet-name>Cities</servlet-name>
@@ -49,4 +62,18 @@
     <url-pattern>/booking</url-pattern>
     <url-pattern>/check-in</url-pattern>
   </servlet-mapping>
+
+  <filter-mapping>
+    <filter-name>RestFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>FlightsQueryFilter</filter-name>
+    <url-pattern>/inbound-schedule</url-pattern>
+    <url-pattern>/outbound-schedule</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>RoutesQueryFilter</filter-name>
+    <url-pattern>/routes</url-pattern>
+  </filter-mapping>
 </web-app>

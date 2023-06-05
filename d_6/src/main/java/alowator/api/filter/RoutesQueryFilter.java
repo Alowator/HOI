@@ -4,7 +4,6 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static alowator.api.Common.sendJsonError;
@@ -18,16 +17,16 @@ public class RoutesQueryFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (response instanceof HttpServletResponse httpResponse) {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
-            if (!processSource(httpRequest, httpResponse)) {
+            if (!verifySource(httpRequest, httpResponse)) {
                 return;
             }
-            if (!processDestination(httpRequest, httpResponse)) {
+            if (!verifyDestination(httpRequest, httpResponse)) {
                 return;
             }
-            if (!processDepartureDate(httpRequest, httpResponse)) {
+            if (!verifyDepartureDate(httpRequest, httpResponse)) {
                 return;
             }
-            if (!processBookingClass(httpRequest, httpResponse)) {
+            if (!verifyBookingClass(httpRequest, httpResponse)) {
                 return;
             }
             processMaxConnections(httpRequest, httpResponse);
@@ -35,7 +34,7 @@ public class RoutesQueryFilter implements Filter {
         chain.doFilter(request, response);
     }
 
-    private boolean processSource(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+    private boolean verifySource(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
         if (httpRequest.getParameter("source") == null) {
             sendJsonError(httpResponse, HttpServletResponse.SC_BAD_REQUEST,
                 "source field must be set");
@@ -44,7 +43,7 @@ public class RoutesQueryFilter implements Filter {
         return true;
     }
 
-    private boolean processDestination(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+    private boolean verifyDestination(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
         if (httpRequest.getParameter("destination") == null) {
             sendJsonError(httpResponse, HttpServletResponse.SC_BAD_REQUEST,
                 "destination field must be set");
@@ -53,7 +52,7 @@ public class RoutesQueryFilter implements Filter {
         return true;
     }
 
-    private boolean processDepartureDate(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+    private boolean verifyDepartureDate(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
         String departureDate = httpRequest.getParameter("departureDate");
         if (departureDate == null) {
             sendJsonError(httpResponse, HttpServletResponse.SC_BAD_REQUEST,
@@ -67,7 +66,7 @@ public class RoutesQueryFilter implements Filter {
         return true;
     }
 
-    private boolean processBookingClass(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+    private boolean verifyBookingClass(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
         String bookingClass = httpRequest.getParameter("bookingClass");
         String[] availableClasses = new String[] {"Economy", "Comfort", "Business"};
         if (bookingClass == null) {

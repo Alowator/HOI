@@ -36,6 +36,16 @@ public class SqlFlightsCollection extends BaseSqlCollection implements FlightCol
         return collectFlights(result);
     }
 
+    @Override
+    public boolean isFlightExists(Integer flightId) throws Exception {
+        String sql =
+            "SELECT * " +
+                "FROM flights " +
+                "WHERE flight_id = ?::integer";
+        ResultSet result = execute(sql, Map.of(1, String.valueOf(flightId)));
+        return result.next();
+    }
+
     private List<Flight> collectFlights(ResultSet result) throws SQLException {
         Map<String, Flight> flights = new HashMap<>();
         while (result.next()) {

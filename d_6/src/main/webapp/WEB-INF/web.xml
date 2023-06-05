@@ -26,6 +26,10 @@
     <servlet-name>Bookings</servlet-name>
     <servlet-class>alowator.api.servlet.BookingsServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Checkin</servlet-name>
+    <servlet-class>alowator.api.servlet.CheckinServlet</servlet-class>
+  </servlet>
 
   <filter>
     <filter-name>RestFilter</filter-name>
@@ -38,6 +42,14 @@
   <filter>
     <filter-name>RoutesQueryFilter</filter-name>
     <filter-class>alowator.api.filter.RoutesQueryFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>BookingQueryFilter</filter-name>
+    <filter-class>alowator.api.filter.BookingQueryFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>CheckinQueryFilter</filter-name>
+    <filter-class>alowator.api.filter.CheckinQueryFilter</filter-class>
   </filter>
 
   <servlet-mapping>
@@ -60,6 +72,9 @@
   <servlet-mapping>
     <servlet-name>Bookings</servlet-name>
     <url-pattern>/booking</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Checkin</servlet-name>
     <url-pattern>/check-in</url-pattern>
   </servlet-mapping>
 
@@ -75,5 +90,13 @@
   <filter-mapping>
     <filter-name>RoutesQueryFilter</filter-name>
     <url-pattern>/routes</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>BookingQueryFilter</filter-name>
+    <url-pattern>/booking</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CheckinQueryFilter</filter-name>
+    <url-pattern>/check-in</url-pattern>
   </filter-mapping>
 </web-app>

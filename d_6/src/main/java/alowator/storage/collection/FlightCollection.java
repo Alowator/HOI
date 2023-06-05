@@ -8,4 +8,6 @@ public interface FlightCollection {
     List<Flight> getInbound(String airport) throws Exception;
 
     List<Flight> getOutbound(String airport) throws Exception;
+
+    boolean isFlightExists(Integer flightId) throws Exception;
 }

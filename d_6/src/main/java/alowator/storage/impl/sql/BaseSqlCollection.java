@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class BaseSqlCollection {
+public abstract class BaseSqlCollection {
     protected final static Connection connection;
     protected final ObjectMapper mapper = new ObjectMapper();
 

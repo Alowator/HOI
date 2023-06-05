@@ -1,6 +1,7 @@
 package alowator.storage;
 
 import alowator.storage.entity.Flight;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -47,6 +48,16 @@ public class TestFlightsCollection {
 
         flights.forEach(flight -> flightNumbers.add(flight.flightNo));
         assertEquals(flights.size(), flightNumbers.size());
+    }
+
+    @Test
+    public void testExistFlight() throws Exception {
+        assertTrue(Storage.flights().isFlightExists(12345));
+    }
+
+    @Test
+    public void testNotExistFlight() throws Exception {
+        assertFalse(Storage.flights().isFlightExists(1234666));
     }
 
     public static void verifyFlightEntity(Flight flight) {

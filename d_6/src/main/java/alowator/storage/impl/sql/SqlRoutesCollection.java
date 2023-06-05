@@ -4,6 +4,7 @@ import alowator.storage.collection.RoutesCollection;
 import alowator.storage.entity.Route;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 import static java.util.Map.entry;
@@ -62,10 +63,35 @@ public class SqlRoutesCollection extends BaseSqlCollection implements RoutesColl
             entry(9, destination),
             entry(10, maxConnections)
         ));
+
         List<Route> routes = new ArrayList<>();
         while (result.next()) {
-            routes.add(new Route(Arrays.asList((Integer[]) result.getArray("route").getArray())));
+            Integer[] flightsId = (Integer[]) result.getArray("route").getArray();
+            List<Route.Trip> trips = new ArrayList<>();
+            for (Integer flightId : flightsId) {
+                trips.add(getTrip(flightId));
+            }
+            routes.add(new Route(trips));
         }
         return routes;
+    }
+
+    @Override
+    public Route.Trip getTrip(int flightId) throws SQLException {
+        String sql = "SELECT * FROM flights WHERE flight_id = ?::integer";
+        ResultSet result = execute(sql, Map.of(1, String.valueOf(flightId)));
+        if (result.next()) {
+            return new Route.Trip(
+                flightId,
+                result.getString("flight_no"),
+                result.getString("scheduled_departure"),
+                result.getString("scheduled_arrival"),
+                result.getString("departure_airport"),
+                result.getString("arrival_airport"),
+                result.getString("aircraft_code")
+            );
+        } else {
+            return null;
+        }
     }
 }
